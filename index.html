@@ -19,8 +19,18 @@
     <!-- Contenedor de Partículas -->
     <div id="particles-js"></div>
 
+    <!-- Pantalla de Bienvenida -->
+    <div id="welcome-screen" class="section active" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+        <div class="welcome-content animate__animated animate__zoomIn">
+            <h1 class="welcome-title" style="font-family: 'Dancing Script', cursive; font-size: 4rem; color: white; text-shadow: 0 0 30px rgba(255,255,255,0.8); margin-bottom: 2rem;">Mis 15 Años</h1>
+            <button id="open-invitation-btn" class="welcome-btn" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; border-radius: 50px; padding: 20px 60px; font-size: 1.5rem; color: white; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s;">
+                <i class="fas fa-gift"></i> Abrir Invitación
+            </button>
+        </div>
+    </div>
+
     <!-- Pantalla de Cuenta Regresiva Inicial (3, 2, 1 ) -->
-    <div id="initial-countdown-screen" class="section active">
+    <div id="initial-countdown-screen" class="section d-none">
         <div class="card-countdown animate__animated">
             <span id="countdown-number">3</span>
         </div>
@@ -52,36 +62,28 @@
                 </h2>
             </div>
         </section>
-        <!-- Sección 3: Momentos (Carrusel Normal) -->
+        <!-- Sección 3: Momentos (Carrusel 3D) -->
         <section id="momentos" class="section">
             <div class="">
                 <h2 class="section-title animate__animated">Momentos Inolvidables</h2>
-                <div class="standard-carousel-container animate__animated">
-                    <div class="carousel-wrapper">
-                        <div class="momentos-carousel">
-                            <div class="carousel-slide active">
-                                <img src="img/foto7.jpeg" alt="Recuerdo de 5 años">
-                                <div class="slide-title">Mis 5 años</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="img/foto5.jpeg" alt="Recuerdo de 10 años">
-                                <div class="slide-title">Mis 10 años</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="img/foto7.jpeg" alt="Recuerdo de 12 años">
-                                <div class="slide-title">Mis 12 años</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="img/foto10.jpg" alt="Recuerdo de 15 años">
-                                <div class="slide-title">Mis 15 años</div>
-                            </div>
+                <div class="carousel-container animate__animated">
+                    <div class="momentos-carousel-3d">
+                        <div class="carousel-item">
+                            <img src="img/foto7.jpeg" alt="Recuerdo de 5 años">
+                            <div class="item-title">Mis 5 años</div>
                         </div>
-                        <button class="carousel-prev-btn">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="carousel-next-btn">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+                        <div class="carousel-item">
+                            <img src="img/foto5.jpeg" alt="Recuerdo de 10 años">
+                            <div class="item-title">Mis 10 años</div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/foto7.jpeg" alt="Recuerdo de 12 años">
+                            <div class="item-title">Mis 12 años</div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/foto10.jpg" alt="Recuerdo de 15 años">
+                            <div class="item-title">Mis 15 años</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,9 +123,16 @@
             <div class="">
                 <h2 class="section-title animate__animated">Vestimenta</h2>
                 <div class="dress-code-text animate__animated" style="font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
-                    <p>Para hacer de este día algo más especial, te sugerimos vestir:</p>
-                    <p style="margin-top: 1rem;"><i class="fas fa-tshirt fa-2x"></i></p>
-                    <p style="font-weight: bold;">Elegante y formal</p>
+                    <p></p>
+                    <p style="font-weight: bold; margin: 2rem 0;">Para hacer de este día algo más especial, te sugerimos vestir:</p>
+                    <div class="dress-reference-images" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                        <div class="reference-image">
+                            <img src="img/camiseta1.png" alt="Referencia de vestimenta 1" style="width: 200px; height: 250px; object-fit: cover; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                        </div>
+                        <div class="reference-image">
+                            <img src="img/camiseta2.png" alt="Referencia de vestimenta 2" style="width: 200px; height: 250px; object-fit: cover; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -172,7 +181,6 @@
 
     <!-- Librerías Externas (JS ) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <!-- Tu script personalizado -->
     <script src="script.js"></script>

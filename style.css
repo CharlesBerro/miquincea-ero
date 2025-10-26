@@ -15,8 +15,41 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 .section.previous { transform: translateX(-100%); z-index: 2; }
 .content-wrapper { position: relative; z-index: 10; padding: 1.5rem; width: 90%; max-width: 500px; background: rgba(0, 0, 0, 0.25); border-radius: 15px; backdrop-filter: blur(5px); }
 
-/* --- PARTÍCULAS DE FONDO --- */
-#particles-js { position: fixed; width: 100%; height: 100%; background-color: #0c192c; z-index: -1; }
+/* --- FLOTADORES SVG COLORIDOS --- */
+#particles-js { 
+    position: fixed; 
+    width: 100%; 
+    height: 100%; 
+    background-color: #0c192c; 
+    z-index: 0; 
+    pointer-events: none;
+    overflow: hidden;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(0);
+        opacity: 0;
+    }
+}
+
+.floater {
+    animation: float-up 15s linear infinite;
+}
+
+/* --- PANTALLA DE BIENVENIDA --- */
+#welcome-screen { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/foto6.jpeg'); z-index: 100; transform: translateX(0); }
+.welcome-btn:hover { background: rgba(255, 255, 255, 0.4) !important; transform: scale(1.05); }
 
 /* --- PANTALLA DE CONTEO INICIAL --- */
 #initial-countdown-screen { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/foto6.jpeg' ); z-index: 100; transform: translateX(0); }
@@ -47,15 +80,7 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 .divider { width: 60px; height: 2px; background-color: #fff; margin: 0.8rem auto; }
 .address-text { font-size: var(--address-text-size); }
 
-/* --- CARRUSEL 3D CILÍNDRICO --- */
-.carousel-container {
-    height: 250px;
-    perspective: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem 0;
-}
+/* --- CARRUSEL 3D CILÍNDRICO (para versiculo) --- */
 .masked-text {
     font-size: 3rem;
     font-weight: bold;
@@ -80,21 +105,29 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
     from { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(59, 157, 238, 0.6), 0 0 80px rgba(0, 123, 255, 0.8), 0 0 100px rgba(0, 123, 255, 0.6); }
     to { box-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(59, 157, 238, 0.8), 0 0 80px rgba(59, 157, 238, 0.6), 0 0 120px rgba(0, 123, 255, 1), 0 0 140px rgba(0, 123, 255, 0.8); }
 }
-.carousel {
-    width: 150px; /* Ancho de las imágenes */
-    height: 180px; /* Alto de las imágenes */
+
+/* --- CARRUSEL 3D PARA MOMENTOS --- */
+.carousel-container {
+    perspective: 1000px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+.momentos-carousel-3d {
+    width: 200px;
+    height: 250px;
     position: relative;
     transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    animation: rotate-carousel 20s linear infinite;
-    transform-origin: center;
-    -webkit-transform-origin: center;
+    animation: rotate-3d-carousel 15s linear infinite;
+    margin: 0 auto;
 }
-@keyframes rotate-carousel {
+@keyframes rotate-3d-carousel {
     from { transform: rotateY(0deg); }
     to { transform: rotateY(360deg); }
 }
-.carousel-item {
+.momentos-carousel-3d .carousel-item {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -103,82 +136,38 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     -webkit-box-reflect: below 5px linear-gradient(transparent, rgba(0,0,0,0.3));
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
 }
-.carousel-item img { width: 100%; height: 100%; object-fit: cover; }
-.item-title { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.6); color: white; padding: 5px; font-size: 0.9rem; text-align: center; }
-/* Posicionamiento de cada item en el cilindro (4 items = 360/4 = 90 grados) */
-.carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); -webkit-transform: rotateY(0deg) translateZ(200px); }
-.carousel-item:nth-child(2) { transform: rotateY(90deg) translateZ(200px); -webkit-transform: rotateY(90deg) translateZ(200px); }
-.carousel-item:nth-child(3) { transform: rotateY(180deg) translateZ(200px); -webkit-transform: rotateY(180deg) translateZ(200px); }
-.carousel-item:nth-child(4) { transform: rotateY(270deg) translateZ(200px); -webkit-transform: rotateY(270deg) translateZ(200px); }
-
-/* --- CARRUSEL NORMAL --- */
-.standard-carousel-container {
-    max-width: 500px;
-    margin: 2rem auto;
-}
-.carousel-wrapper {
-    position: relative;
+.momentos-carousel-3d .carousel-item img {
     width: 100%;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.momentos-carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-.carousel-slide {
-    min-width: 100%;
-    position: relative;
-}
-.carousel-slide img {
-    width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
-    display: block;
 }
-.slide-title {
+.momentos-carousel-3d .item-title {
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    width: 100%;
+    background: rgba(0,0,0,0.7);
     color: white;
-    padding: 20px;
+    padding: 10px;
+    font-size: 1rem;
     text-align: center;
-    font-size: 1.2rem;
     font-weight: bold;
 }
-.carousel-prev-btn,
-.carousel-next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.8);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    transition: background 0.3s;
+/* Posicionamiento en 3D - 4 items */
+.momentos-carousel-3d .carousel-item:nth-child(1) { 
+    transform: rotateY(0deg) translateZ(300px);
 }
-.carousel-prev-btn {
-    left: 10px;
+.momentos-carousel-3d .carousel-item:nth-child(2) { 
+    transform: rotateY(90deg) translateZ(300px);
 }
-.carousel-next-btn {
-    right: 10px;
+.momentos-carousel-3d .carousel-item:nth-child(3) { 
+    transform: rotateY(180deg) translateZ(300px);
 }
-.carousel-prev-btn:hover,
-.carousel-next-btn:hover {
-    background: rgba(255, 255, 255, 1);
+.momentos-carousel-3d .carousel-item:nth-child(4) { 
+    transform: rotateY(270deg) translateZ(300px);
 }
 
 /* --- CONTROLES DE NAVEGACIÓN Y MÚSICA --- */
@@ -199,6 +188,10 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
     #event-countdown { font-size: 0.7rem; }
     #event-countdown span { font-size: 1.8rem; }
     .main-invite-text { font-size: 1rem; }
-    /* Ajuste del carrusel en móviles */
-    .carousel-slide img { height: 250px; }
+    /* Ajuste del carrusel 3D en móviles */
+    .momentos-carousel-3d { width: 150px; height: 200px; }
+    .momentos-carousel-3d .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
+    .momentos-carousel-3d .carousel-item:nth-child(2) { transform: rotateY(90deg) translateZ(200px); }
+    .momentos-carousel-3d .carousel-item:nth-child(3) { transform: rotateY(180deg) translateZ(200px); }
+    .momentos-carousel-3d .carousel-item:nth-child(4) { transform: rotateY(270deg) translateZ(200px); }
 }

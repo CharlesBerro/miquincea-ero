@@ -1,29 +1,60 @@
 $(document).ready(function() {
 
-    // --- CONFIGURACIÓN DE PARTÍCULAS INICIAL (Estrellas suaves) ---
-    particlesJS("particles-js", {
-        particles: { number: { value: 80 }, color: { value: "#ffffff" }, shape: { type: "star" }, opacity: { value: 0.5, random: true }, size: { value: 2, random: true }, move: { enable: true, speed: 1, direction: "none", straight: false } },
-        interactivity: { events: { onhover: { enable: true, mode: "repulse" } } }
-    });
+    // Función para crear flotadores SVG
+    function createFloaters() {
+        const colors = ['#ff69b4', '#add8e6', '#ffffff', '#f0e68c', '#ffb6c1', '#87ceeb'];
+        const floaters = [];
+        const particlesContainer = document.getElementById('particles-js');
+        
+        for (let i = 0; i < 30; i++) {
+            const floater = document.createElement('div');
+            floater.className = 'floater';
+            floater.style.position = 'fixed';
+            floater.style.width = Math.random() * 20 + 10 + 'px';
+            floater.style.height = floater.style.width;
+            floater.style.left = Math.random() * 100 + '%';
+            floater.style.top = '100%';
+            floater.style.background = colors[Math.floor(Math.random() * colors.length)];
+            floater.style.borderRadius = '50%';
+            floater.style.opacity = '0.8';
+            floater.style.zIndex = '0';
+            floater.style.pointerEvents = 'none';
+            floater.style.animation = `float-up ${Math.random() * 5 + 10}s linear infinite`;
+            floater.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(floater);
+            floaters.push(floater);
+        }
+    }
+    
+    // Crear los flotadores SVG
+    createFloaters();
 
     // --- CONTEO INICIAL Y TRANSICIÓN ---
     let initialCount = 3;
     const music = $('#background-music')[0];
     
+    // Botón de abrir invitación
+    $('#open-invitation-btn').on('click', function() {
+        // Iniciar música cuando el usuario hace clic
+        music.play().catch(function(error) {
+            console.log('Error al reproducir música:', error);
+        });
+        
+        // Ocultar pantalla de bienvenida y mostrar conteo
+        $('#welcome-screen').addClass('animate__animated animate__fadeOut').one('animationend', function() {
+            $('#welcome-screen').addClass('d-none');
+            $('#initial-countdown-screen').removeClass('d-none');
+            runInitialCountdown();
+        });
+    });
+    
     function runInitialCountdown() {
         if (initialCount > 0) {
-            // Iniciar música cuando comience el conteo (cuando muestra el 3)
-            if (initialCount === 3) {
-                music.play().catch(function(error) {
-                    console.log('Trying to play music:', error);
-                });
-            }
             $('#countdown-number').text(initialCount).parent().removeClass().addClass('card-countdown animate__animated animate__zoomIn');
             setTimeout(() => { $('#countdown-number').parent().removeClass().addClass('card-countdown animate__animated animate__zoomOut'); }, 800);
             initialCount--;
             setTimeout(runInitialCountdown, 1000);
         } else {
-            triggerPetalExplosion();
             $('#initial-countdown-screen').addClass('animate__animated animate__fadeOut').one('animationend', function() {
                 $(this).remove();
                 $('#invitation-main, #navigation-controls, #music-btn').removeClass('d-none');
@@ -33,21 +64,7 @@ $(document).ready(function() {
             });
         }
     }
-    runInitialCountdown();
 
-    function triggerPetalExplosion() {
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 50, density: { enable: true, value_area: 800 } },
-                color: { value: ["#ff69b4", "#add8e6", "#ffffff", "#f0e68c"] }, // Rosa, azul, blanco, dorado
-                shape: { type: "circle" },
-                opacity: { value: 1, random: false },
-                size: { value: 15, random: true, anim: { enable: true, speed: 5, size_min: 5, sync: false } },
-                move: { enable: true, speed: 6, direction: "bottom", random: true, straight: false, out_mode: "out" }
-            },
-            interactivity: { detect_on: "window" }
-        } );
-    }
 
     // --- LÓGICA DE NAVEGACIÓN HORIZONTAL ---
     const sections = $('#invitation-main .section');
@@ -94,7 +111,6 @@ $(document).ready(function() {
             { selector: '.fifteen-number-container', animation: 'animate__fadeInUp', delay: '1.2s' },
             { selector: '.section-title', animation: 'animate__fadeInDown', delay: '0.5s' },
             { selector: '.carousel-container', animation: 'animate__zoomIn', delay: '1s' },
-            { selector: '.standard-carousel-container', animation: 'animate__zoomIn', delay: '1s' },
             { selector: '.cursive-text', animation: 'animate__fadeIn', delay: '0.5s' },
             { selector: '#event-countdown', animation: 'animate__fadeInUp', delay: '1.5s' },
             { selector: '.main-invite-text', animation: 'animate__zoomIn', delay: '0.5s' },
@@ -114,26 +130,6 @@ $(document).ready(function() {
         }, 300);
     }
 
-    // --- CONTROL DE CARRUSEL DE MOMENTOS ---
-    let currentSlide = 0;
-    const slides = $('.carousel-slide');
-    const totalSlides = slides.length;
-
-    function showSlide(index) {
-        $('.momentos-carousel').css('transform', `translateX(-${index * 100}%)`);
-        $('.carousel-slide').removeClass('active');
-        slides.eq(index).addClass('active');
-    }
-
-    $('.carousel-next-btn').on('click', function() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        showSlide(currentSlide);
-    });
-
-    $('.carousel-prev-btn').on('click', function() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlide(currentSlide);
-    });
 
     // --- CONTEO REGRESIVO DEL EVENTO Y MÚSICA ---
     // (Esta parte del código no ha cambiado)
