@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis 15 Años</title>
+    
+    <!-- Librerías Externas (CSS) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Dancing+Script:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tu hoja de estilos personalizada -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Contenedor de Partículas -->
+    <div id="particles-js"></div>
+
+    <!-- Pantalla de Cuenta Regresiva Inicial (3, 2, 1 ) -->
+    <div id="initial-countdown-screen" class="section active">
+        <div class="card-countdown animate__animated">
+            <span id="countdown-number">3</span>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal de la Invitación (inicialmente oculto) -->
+    <main id="invitation-main" class="d-none">
+        
+        <!-- Sección 1: Portada -->
+        <section id="portada" class="section">
+            <div class="">
+                <h1 class="presentation-title animate__animated">Vamos  a Festejar</h1>
+                <img src="img/foto7.jpeg" alt="Foto de la Quinceañera" class="presentation-photo animate__animated">
+                <div class="fifteen-number-container animate__animated">
+                    <h1 class="presentation-title animate__animated"> Mis</h1>
+                    <span class="number-15 masked-text">15</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 2: Versiculo (Solo texto) -->
+        <section id="versiculo" class="section">
+            <div class="">
+                <h2 class="section-title animate__animated" style="font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+                    Tú hiciste todo mi ser, tanto mis sentimientos como mi cuerpo, desde que me hiciste tomar forma en el vientre de mi madre. Te agradezco porque me hiciste de una manera maravillosa; sé muy bien que tus obras son maravillosas.
+                </h2>
+                <h2 class="section-title animate__animated" style="font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+                    Tú hiciste todo mi ser, tanto mis sentimientos como mi cuerpo, desde que me hiciste tomar forma en el vientre de mi madre. Te agradezco porque me hiciste de una manera maravillosa; sé muy bien que tus obras son maravillosas.
+                </h2>
+            </div>
+        </section>
+        <!-- Sección 3: Momentos (Carrusel Normal) -->
+        <section id="momentos" class="section">
+            <div class="">
+                <h2 class="section-title animate__animated">Momentos Inolvidables</h2>
+                <div class="standard-carousel-container animate__animated">
+                    <div class="carousel-wrapper">
+                        <div class="momentos-carousel">
+                            <div class="carousel-slide active">
+                                <img src="img/foto7.jpeg" alt="Recuerdo de 5 años">
+                                <div class="slide-title">Mis 5 años</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img/foto5.jpeg" alt="Recuerdo de 10 años">
+                                <div class="slide-title">Mis 10 años</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img/foto7.jpeg" alt="Recuerdo de 12 años">
+                                <div class="slide-title">Mis 12 años</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img/foto10.jpg" alt="Recuerdo de 15 años">
+                                <div class="slide-title">Mis 15 años</div>
+                            </div>
+                        </div>
+                        <button class="carousel-prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 4: Cuenta Regresiva del Evento -->
+        <section id="evento" class="section">
+            <div class="">
+                 <p class="cursive-text animate__animated">Porque son parte de mi vida, es mi deseo que compartan conmigo este día tan especial.</p>
+                <h2 class="section-title animate__animated">Faltan</h2>
+                <div id="event-countdown" class="animate__animated">
+                    <div><span id="days">00</span> Días</div>
+                    <div><span id="hours">00</span> Horas</div>
+                    <div><span id="minutes">00</span> Minutos</div>
+                    <div><span id="seconds">00</span> Segundos</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 5: Lugar y Fecha -->
+        <section id="lugar" class="section">
+            <div class="">
+                <div class="main-invite-text animate__animated">
+                    <p class="mb-1">Te invitamos el día</p>
+                    <p class="mb-2">Domingo 23 de Nov. a las 16:00 P. M.</p>
+                    <hr class="divider">
+                </div>
+                <div class="address-text animate__animated">
+                    <i class="fa-solid fa-map-marker-alt fa-2x mb-3"></i>
+                    <p>En Calle Cualquiera 123, Ciudad</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 6: Vestimenta -->
+        <section id="vestimenta" class="section">
+            <div class="">
+                <h2 class="section-title animate__animated">Vestimenta</h2>
+                <div class="dress-code-text animate__animated" style="font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+                    <p>Para hacer de este día algo más especial, te sugerimos vestir:</p>
+                    <p style="margin-top: 1rem;"><i class="fas fa-tshirt fa-2x"></i></p>
+                    <p style="font-weight: bold;">Elegante y formal</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 7: Regalo -->
+        <section id="regalo" class="section">
+            <div class="">
+                <h2 class="section-title animate__animated">Tu presencia es el mejor regalo</h2>
+                <div class="gift-text animate__animated" style="font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+                    <p>Si deseas darme un presente, aquí te dejamos algunas ideas que me harían muy feliz:</p>
+                    <p style="margin-top: 1rem;"><i class="fas fa-gift fa-2x"></i></p>
+                    <p style="font-style: italic;">Tu acompañamiento es lo más importante</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 8: Confirmación de Asistencia -->
+        <section id="confirmacion" class="section">
+            <div class="">
+                <h2 class="section-title animate__animated">Confirma tu asistencia</h2>
+                <div class="confirmation-text animate__animated" style="font-size: 1.1rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+                    <p>Esperamos que puedas acompañarnos en este día tan especial.</p>
+                    <a href="https://wa.me/1234567890?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20al%20quincea%C3%B1ero" 
+                       target="_blank" 
+                       class="btn btn-primary btn-lg mt-3" 
+                       style="background-color: #25D366; border: none; padding: 15px 30px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold;">
+                        <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Controles de Navegación y Música -->
+    <div id="navigation-controls" class="d-none">
+        <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+        <button id="next-btn"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <button id="music-btn" class="d-none"><i class="fas fa-music"></i></button>
+    
+    <!-- Elemento de Audio -->
+    <audio id="background-music" loop autoplay>
+        <source src="music/desierto.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Librerías Externas (JS ) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- Tu script personalizado -->
+    <script src="script.js"></script>
+
+</body>
+</html>
