@@ -16,15 +16,15 @@
 </head>
 <body>
 
-    <!-- Contenedor de Partículas -->
-    <div id="particles-js"></div>
+    <!-- Contenedor de Partículas (deshabilitado) -->
+    <!-- <div id="particles-js"></div> -->
 
     <!-- Pantalla de Bienvenida -->
     <div id="welcome-screen" class="section active" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
         <div class="welcome-content animate__animated animate__zoomIn">
-            <h1 class="welcome-title" style="font-family: 'Dancing Script', cursive; font-size: 4rem; color: white; text-shadow: 0 0 30px rgba(255,255,255,0.8); margin-bottom: 2rem;">Mis 15 Años</h1>
-            <button id="open-invitation-btn" class="welcome-btn" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; border-radius: 50px; padding: 20px 60px; font-size: 1.5rem; color: white; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s;">
-                <i class="fas fa-gift"></i> Abrir Invitación
+            <h1 class="welcome-title" style="font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: white; text-shadow: 0 0 30px rgba(255,255,255,0.8); margin-bottom: 2rem;">Hola soy Michell y quiero decirte Algo Especial</h1>
+            <button id="open-invitation-btn" class="welcome-btn" style="background: rgba(255, 255, 255, 0.2); border: 2px solid white; border-radius: 50px; padding: 20px 60px; font-size: 1.5rem; color: white; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; position: relative; z-index: 200;">
+                <i class="fas fa-gift"></i> Continua... 😊
             </button>
         </div>
     </div>
@@ -32,7 +32,7 @@
     <!-- Pantalla de Cuenta Regresiva Inicial (3, 2, 1 ) -->
     <div id="initial-countdown-screen" class="section d-none">
         <div class="card-countdown animate__animated">
-            <span id="countdown-number">3</span>
+            <span id="countdown-number"></span>
         </div>
     </div>
 
@@ -54,13 +54,20 @@
         <!-- Sección 2: Versiculo (Solo texto) -->
         <section id="versiculo" class="section">
             <div class="">
-                <h2 class="section-title animate__animated" style="font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
-                    Tú hiciste todo mi ser, tanto mis sentimientos como mi cuerpo, desde que me hiciste tomar forma en el vientre de mi madre. Te agradezco porque me hiciste de una manera maravillosa; sé muy bien que tus obras son maravillosas.
+                <h2 class="section-title animate__animated versiculo-title" >
+                    Tú hiciste todo mi ser, 
                 </h2>
-                <h2 class="section-title animate__animated" style="font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
-                    Tú hiciste todo mi ser, tanto mis sentimientos como mi cuerpo, desde que me hiciste tomar forma en el vientre de mi madre. Te agradezco porque me hiciste de una manera maravillosa; sé muy bien que tus obras son maravillosas.
-                </h2>
+                <p class="section-title animate__animated versiculo-p1" >
+                    tanto mis sentimientos como mi cuerpo, desde que me hiciste tomar forma en el vientre de mi madre.
+                </p>
+                <p class="section-title animate__animated versiculo-p2">
+                    Te agradezco porque me hiciste de una manera maravillosa; sé muy bien que tus obras son maravillosas.
+                </p>
+                <p class="section-title animate__animated versiculo-p3" >
+                   sé muy bien que tus obras son maravillosas.
+                </p>
             </div>
+           
         </section>
         <!-- Sección 3: Momentos (Carrusel 3D) -->
         <section id="momentos" class="section">
@@ -92,7 +99,7 @@
         <!-- Sección 4: Cuenta Regresiva del Evento -->
         <section id="evento" class="section">
             <div class="">
-                 <p class="cursive-text animate__animated">Porque son parte de mi vida, es mi deseo que compartan conmigo este día tan especial.</p>
+                 <p class="cursive-text animate__animated evento-intro">Porque son parte de mi vida, es mi deseo que compartan conmigo este día tan especial.</p>
                 <h2 class="section-title animate__animated">Faltan</h2>
                 <div id="event-countdown" class="animate__animated">
                     <div><span id="days">00</span> Días</div>
@@ -113,7 +120,7 @@
                 </div>
                 <div class="address-text animate__animated">
                     <i class="fa-solid fa-map-marker-alt fa-2x mb-3"></i>
-                    <p>En Calle Cualquiera 123, Ciudad</p>
+                    <p>Casa Eventos "Entre Robles" - San Antonio</p>
                 </div>
             </div>
         </section>
@@ -121,7 +128,7 @@
         <!-- Sección 6: Vestimenta -->
         <section id="vestimenta" class="section">
             <div class="">
-                <h2 class="section-title animate__animated">Vestimenta</h2>
+                <h2 class="section-title animate__animated">Codigo deVestimenta</h2>
                 <div class="dress-code-text animate__animated" style="font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
                     <p></p>
                     <p style="font-weight: bold; margin: 2rem 0;">Para hacer de este día algo más especial, te sugerimos vestir:</p>

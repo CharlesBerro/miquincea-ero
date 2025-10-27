@@ -1,51 +1,35 @@
 $(document).ready(function() {
 
-    // Función para crear flotadores SVG
-    function createFloaters() {
-        const colors = ['#ff69b4', '#add8e6', '#ffffff', '#f0e68c', '#ffb6c1', '#87ceeb'];
-        const floaters = [];
-        const particlesContainer = document.getElementById('particles-js');
-        
-        for (let i = 0; i < 30; i++) {
-            const floater = document.createElement('div');
-            floater.className = 'floater';
-            floater.style.position = 'fixed';
-            floater.style.width = Math.random() * 20 + 10 + 'px';
-            floater.style.height = floater.style.width;
-            floater.style.left = Math.random() * 100 + '%';
-            floater.style.top = '100%';
-            floater.style.background = colors[Math.floor(Math.random() * colors.length)];
-            floater.style.borderRadius = '50%';
-            floater.style.opacity = '0.8';
-            floater.style.zIndex = '0';
-            floater.style.pointerEvents = 'none';
-            floater.style.animation = `float-up ${Math.random() * 5 + 10}s linear infinite`;
-            floater.style.animationDelay = Math.random() * 5 + 's';
-            particlesContainer.appendChild(floater);
-            floaters.push(floater);
-        }
-    }
-    
-    // Crear los flotadores SVG
-    createFloaters();
+    // Partículas deshabilitadas
+    // function createFloaters() {
+    //     // Deshabilitado
+    // }
 
     // --- CONTEO INICIAL Y TRANSICIÓN ---
     let initialCount = 3;
     const music = $('#background-music')[0];
     
     // Botón de abrir invitación
-    $('#open-invitation-btn').on('click', function() {
-        // Iniciar música cuando el usuario hace clic
-        music.play().catch(function(error) {
-            console.log('Error al reproducir música:', error);
-        });
+    console.log('Script cargado');
+    console.log('Botón encontrado:', $('#open-invitation-btn').length);
+    
+    // Usar on() con delegación directa
+    $(document).on('click', '#open-invitation-btn', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Botón clickeado!');
         
-        // Ocultar pantalla de bienvenida y mostrar conteo
-        $('#welcome-screen').addClass('animate__animated animate__fadeOut').one('animationend', function() {
-            $('#welcome-screen').addClass('d-none');
-            $('#initial-countdown-screen').removeClass('d-none');
-            runInitialCountdown();
-        });
+        // Iniciar música cuando el usuario hace clic
+        if (music) {
+            music.play().catch(function(error) {
+                console.log('Error al reproducir música:', error);
+            });
+        }
+        
+        // Ocultar pantalla de bienvenida inmediatamente
+        $('#welcome-screen').css('display', 'none');
+        $('#initial-countdown-screen').removeClass('d-none');
+        runInitialCountdown();
     });
     
     function runInitialCountdown() {
@@ -55,13 +39,31 @@ $(document).ready(function() {
             initialCount--;
             setTimeout(runInitialCountdown, 1000);
         } else {
-            $('#initial-countdown-screen').addClass('animate__animated animate__fadeOut').one('animationend', function() {
-                $(this).remove();
-                $('#invitation-main, #navigation-controls, #music-btn').removeClass('d-none');
-                $('#portada').addClass('active');
-                animateSectionContent($('#portada'));
-                updateNavButtons();
-            });
+            // Animación especial al terminar
+            $('#countdown-number').text('Vamos...').css('font-size', '15vw').parent().removeClass().addClass('card-countdown animate__animated animate__zoomIn');
+            
+            setTimeout(() => {
+                $('#initial-countdown-screen').addClass('animate__animated animate__fadeOut');
+                setTimeout(() => {
+                    $('#initial-countdown-screen').remove();
+                    // Transición suave a la primera sección
+                    $('#invitation-main').removeClass('d-none').css('opacity', 0);
+                    $('#navigation-controls, #music-btn').removeClass('d-none');
+                    
+                    $('#portada').addClass('active').css('opacity', 0);
+                    
+                    // Animación de entrada elegante
+                    setTimeout(() => {
+                        $('#invitation-main').css('opacity', 1);
+                        $('#portada').css({
+                            'opacity': 1,
+                            'animation': 'zoomIn 1s ease-out'
+                        });
+                        animateSectionContent($('#portada'));
+                        updateNavButtons();
+                    }, 300);
+                }, 800);
+            }, 800);
         }
     }
 
