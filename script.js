@@ -1,9 +1,119 @@
 $(document).ready(function() {
 
+    // --- LÓGICA DEL CARRUSEL 3D ---
+    const items = [
+        {
+            image: 'img/foto7.jpeg',
+            caption: 'Mis 5 años'
+        },
+        {
+            image: 'img/foto5.jpeg',
+            caption: 'Mis 10 años'
+        },
+        {
+            image: 'img/foto7.jpeg',
+            caption: 'Mis 12 años'
+        },
+        {
+            image: 'img/foto10.jpg',
+            caption: 'Mis 15 años'
+        },
+        {
+            image: 'img/foto1.jpg',
+            caption: 'Mi Fiesta'
+        },
+        {
+            image: 'img/foto2.jpg',
+            caption: 'Mis Amigos'
+            
+        },
+          {
+            image: 'img/foto1.jpg',
+            caption: 'Mis padres'
+            
+        }
+    ];
+
+    // Variables de estado
+    const totalItems = items.length;
+    const angle = 360 / totalItems;
+    const radius = 300; // Radio del carrusel, ajustado para el tamaño de la tarjeta
+
+    function createCarouselItems() {
+        const carousel = document.getElementById('carousel');
+        const indicatorsContainer = document.getElementById('indicators');
+        if (!carousel || !indicatorsContainer) return;
+
+        // Limpiar contenido existente (si lo hubiera)
+        carousel.innerHTML = '';
+        indicatorsContainer.innerHTML = '';
+
+        for (let i = 0; i < totalItems; i++) {
+            // Crear elemento del carrusel
+            const item = document.createElement('div');
+            item.className = 'carousel-item';
+            
+            const img = document.createElement('img');
+            img.className = 'carousel-img';
+            img.src = items[i].image;
+            img.alt = items[i].caption;
+            
+            const caption = document.createElement('div');
+            caption.className = 'carousel-caption';
+            caption.textContent = items[i].caption;
+            
+            item.appendChild(img);
+            item.appendChild(caption);
+            carousel.appendChild(item);
+            
+            // Crear indicadores
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator';
+            indicator.dataset.index = i;
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        // Posicionar elementos en 3D
+        positionItems();
+        updateIndicators(0); // Inicializar el indicador activo
+    }
+
+    // Posicionar elementos en el espacio 3D
+    function positionItems() {
+        const carouselItems = document.querySelectorAll('#momentos .carousel-item');
+        
+        carouselItems.forEach((item, index) => {
+            // Calcular rotación en el eje Y
+            const rotateY = index * angle;
+            
+            // Aplicar transformación
+            item.style.transform = `rotateY(${rotateY}deg) translateZ(${radius}px)`;
+        });
+    }
+
+    // Función para actualizar el indicador activo (opcional, si se implementa navegación)
+    function updateIndicators(activeIndex) {
+        document.querySelectorAll('#momentos .indicator').forEach((ind, index) => {
+            ind.classList.toggle('active', index === activeIndex);
+        });
+    }
+
+    // Inicializar carrusel al cargar el DOM
+    createCarouselItems();
+
+    // --- FIN LÓGICA DEL CARRUSEL 3D ---
+    
     // Partículas deshabilitadas
     // function createFloaters() {
     //     // Deshabilitado
     // }
+
+    // Partículas deshabilitadas
+    // function createFloaters() {
+    //     // Deshabilitado
+    // }
+
+
 
     // --- CONTEO INICIAL Y TRANSICIÓN ---
     let initialCount = 3;
@@ -80,25 +190,31 @@ $(document).ready(function() {
         if (currentSectionIndex > 0) { changeSection(currentSectionIndex - 1); }
     });
 
-    function changeSection(newIndex) {
-        const currentSection = $(sections[currentSectionIndex]);
-        const newSection = $(sections[newIndex]);
+	function changeSection(newIndex) {
+	    const currentSection = $(sections[currentSectionIndex]);
+	    const newSection = $(sections[newIndex]);
 
-        // Remueve clases de animación de la sección que se va
-        currentSection.find('.animate__animated').removeClass('animate__fadeInDown animate__zoomIn animate__fadeInUp animate__fadeIn');
-        
-        if (newIndex > currentSectionIndex) { // Hacia adelante
-            currentSection.removeClass('active').addClass('previous');
-            newSection.addClass('active');
-        } else { // Hacia atrás
-            currentSection.removeClass('active');
-            $(sections[newIndex]).removeClass('previous').addClass('active');
-        }
-        
-        currentSectionIndex = newIndex;
-        updateNavButtons();
-        animateSectionContent(newSection);
-    }
+	    // Remueve clases de animación de la sección que se va
+	    currentSection.find('.animate__animated').removeClass('animate__fadeInDown animate__zoomIn animate__fadeInUp animate__fadeIn');
+	    
+	    if (newIndex > currentSectionIndex) { // Hacia adelante
+	        currentSection.removeClass('active').addClass('previous');
+	        newSection.addClass('active');
+	    } else { // Hacia atrás
+	        currentSection.removeClass('active');
+	        $(sections[newIndex]).removeClass('previous').addClass('active');
+	    }
+	    
+	    currentSectionIndex = newIndex;
+	    updateNavButtons();
+	    
+	    // Lógica para re-inicializar el carrusel 3D si se navega a la sección 'momentos'
+	    if (newSection.attr('id') === 'momentos') {
+	        createCarouselItems(); // Re-inicializa el carrusel
+	    }
+	    
+	    animateSectionContent(newSection);
+	}
     
     function updateNavButtons() {
         $('#prev-btn').prop('disabled', currentSectionIndex === 0);
