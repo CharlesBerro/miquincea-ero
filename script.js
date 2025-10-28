@@ -6,6 +6,34 @@ $(document).ready(function() {
         return urlParams.get(name);
     }
 
+    // --- MODAL DE IMÁGENES (VESTIMENTA) ---
+    function initImageModal() {
+        const $modal = $('#image-modal');
+        const $modalImg = $('#modal-image');
+        const $close = $modal.find('.close-modal');
+
+        // Abrir al hacer clic en miniatura
+        $(document).on('click', '.dress-thumb', function() {
+            const src = $(this).attr('src');
+            $modalImg.attr('src', src);
+            $modal.addClass('open').attr('aria-hidden', 'false');
+        });
+
+        // Cerrar con botón
+        $(document).on('click', '.close-modal', function() {
+            $modal.removeClass('open').attr('aria-hidden', 'true');
+            $modalImg.attr('src', '');
+        });
+
+        // Cerrar al hacer clic fuera de la imagen
+        $modal.on('click', function(e) {
+            if (e.target === this) {
+                $modal.removeClass('open').attr('aria-hidden', 'true');
+                $modalImg.attr('src', '');
+            }
+        });
+    }
+
     // Obtener nombre de familia y cupos de la URL
     const nombreFamilia = getUrlParameter('familia');
     const cupos = getUrlParameter('cupos');
@@ -347,17 +375,18 @@ $(document).ready(function() {
         if (cupos && cupos !== '') {
             numeroCupos.text(cupos);
             cuposInfo.show();
-            
-            // Construir mensaje de WhatsApp con el número de cupos
-            const nombre = decodeURIComponent(getUrlParameter('familia') || 'Invitado');
-            const mensaje = `Hola, quiero confirmar mi asistencia al quinceañero. Nombre: ${nombre}${cupos ? `. Cupos: ${cupos}` : ''}`;
-            const urlWhatsapp = `https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`;
-            whatsappLink.attr('href', urlWhatsapp);
         } else {
             cuposInfo.hide();
-            const mensaje = `Hola, quiero confirmar mi asistencia al quinceañero`;
-            const urlWhatsapp = `https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`;
-            whatsappLink.attr('href', urlWhatsapp);
         }
+
+        // Mensaje exacto solicitado para WhatsApp, con nombre e hiperlink actual
+        const nombre = decodeURIComponent(getUrlParameter('familia') || 'Invitado');
+        const enlace = window.location.href;
+        const mensaje = `🌸 ¡Estás invitado a mis 15 ! 🌸\n\nHola ${nombre}\n\nQueremos Compartir Contigo este momento tan especial. Por favor abre el Enlace:\n\n${enlace}\n\nPor favor, confirma tu asistencia en la invitación digital. ¡Te esperamos! 💕\n\nCon cariño,\nMichell calderon`;
+        const urlWhatsapp = `https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`;
+        whatsappLink.attr('href', urlWhatsapp);
     }
+
+    // Inicializar modal de imágenes
+    initImageModal();
 });
