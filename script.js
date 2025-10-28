@@ -1,5 +1,26 @@
 $(document).ready(function() {
 
+    // --- LEER PARÁMETROS DE URL ---
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Obtener nombre de familia y cupos de la URL
+    const nombreFamilia = getUrlParameter('familia');
+    const cupos = getUrlParameter('cupos');
+
+    // Mostrar nombre de familia en la sección lugar y fecha
+    if (nombreFamilia) {
+        const nombreDecodificado = decodeURIComponent(nombreFamilia);
+        $('#nombre-familia').text(nombreDecodificado);
+    } else {
+        $('#nombre-familia').text('Invitado Especial'); // Valor por defecto
+    }
+
+    // Guardar cupos para mostrar en confirmación
+    window.cuposInvitacion = cupos || '';
+
     // --- LÓGICA DEL CARRUSEL 3D ---
     const items = [
         {
@@ -38,6 +59,7 @@ $(document).ready(function() {
     const totalItems = items.length;
     const angle = 360 / totalItems;
     const radius = 300; // Radio del carrusel, ajustado para el tamaño de la tarjeta
+    let carouselInitialized = false;
 
     function createCarouselItems() {
         const carousel = document.getElementById('carousel');
@@ -76,6 +98,45 @@ $(document).ready(function() {
         // Posicionar elementos en 3D
         positionItems();
         updateIndicators(0); // Inicializar el indicador activo
+        
+        // Forzar que el carrusel sea visible y la animación se active
+        const carouselElement = document.querySelector('.carousel');
+        if (carouselElement) {
+            carouselElement.style.display = 'block';
+            carouselElement.style.animation = 'rotate 30s infinite linear';
+        }
+        
+        carouselInitialized = true;
+    }
+
+    function ensureCarouselVisible() {
+        const momentosSection = $('#momentos');
+        const carousel = momentosSection.find('.carousel');
+        const carouselScene = momentosSection.find('.carousel-scene');
+        
+        if (carousel.length && momentosSection.hasClass('active')) {
+            // Asegurar que el contenedor del carrusel esté visible
+            carouselScene.css({
+                'visibility': 'visible',
+                'opacity': '1',
+                'display': 'block'
+            });
+            
+            // Forzar re-aplicación de la animación del carrusel
+            const carouselElement = carousel[0];
+            if (carouselElement) {
+                // Re-aplicar estilos inline para asegurar visibilidad
+                carouselElement.style.display = 'block';
+                carouselElement.style.visibility = 'visible';
+                carouselElement.style.opacity = '1';
+                
+                // Forzar reinicio de la animación
+                carouselElement.style.animation = 'none';
+                setTimeout(() => {
+                    carouselElement.style.animation = 'rotate 30s infinite linear';
+                }, 10);
+            }
+        }
     }
 
     // Posicionar elementos en el espacio 3D
@@ -98,8 +159,8 @@ $(document).ready(function() {
         });
     }
 
-    // Inicializar carrusel al cargar el DOM
-    createCarouselItems();
+    // No inicializar el carrusel inmediatamente, se inicializará cuando se navegue a la sección
+    // Esto evita problemas de visibilidad
 
     // --- FIN LÓGICA DEL CARRUSEL 3D ---
     
@@ -150,7 +211,7 @@ $(document).ready(function() {
             setTimeout(runInitialCountdown, 1000);
         } else {
             // Animación especial al terminar
-            $('#countdown-number').text('Vamos...').css('font-size', '15vw').parent().removeClass().addClass('card-countdown animate__animated animate__zoomIn');
+            $('#countdown-number').text('Acompañame...').css('font-size', '12vw').parent().removeClass().addClass('card-countdown animate__animated animate__zoomIn');
             
             setTimeout(() => {
                 $('#initial-countdown-screen').addClass('animate__animated animate__fadeOut');
@@ -210,7 +271,17 @@ $(document).ready(function() {
 	    
 	    // Lógica para re-inicializar el carrusel 3D si se navega a la sección 'momentos'
 	    if (newSection.attr('id') === 'momentos') {
-	        createCarouselItems(); // Re-inicializa el carrusel
+	        // Si el carrusel ya fue inicializado, asegurar que esté visible
+	        if (carouselInitialized) {
+	            ensureCarouselVisible();
+	        } else {
+	            createCarouselItems(); // Re-inicializa el carrusel
+	        }
+	    }
+	    
+	    // Configurar sección de confirmación
+	    if (newSection.attr('id') === 'confirmacion') {
+	        setupConfirmacion();
 	    }
 	    
 	    animateSectionContent(newSection);
@@ -265,4 +336,28 @@ $(document).ready(function() {
         if (music.paused) { music.play(); $(this).addClass('playing'); } 
         else { music.pause(); $(this).removeClass('playing'); }
     });
+
+    // Configurar sección de confirmación con cupos
+    function setupConfirmacion() {
+        const cupos = window.cuposInvitacion;
+        const numeroCupos = $('#numero-cupos');
+        const cuposInfo = $('#cupos-info');
+        const whatsappLink = $('#whatsapp-link');
+        
+        if (cupos && cupos !== '') {
+            numeroCupos.text(cupos);
+            cuposInfo.show();
+            
+            // Construir mensaje de WhatsApp con el número de cupos
+            const nombre = decodeURIComponent(getUrlParameter('familia') || 'Invitado');
+            const mensaje = `Hola, quiero confirmar mi asistencia al quinceañero. Nombre: ${nombre}${cupos ? `. Cupos: ${cupos}` : ''}`;
+            const urlWhatsapp = `https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`;
+            whatsappLink.attr('href', urlWhatsapp);
+        } else {
+            cuposInfo.hide();
+            const mensaje = `Hola, quiero confirmar mi asistencia al quinceañero`;
+            const urlWhatsapp = `https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`;
+            whatsappLink.attr('href', urlWhatsapp);
+        }
+    }
 });
