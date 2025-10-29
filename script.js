@@ -52,35 +52,42 @@ $(document).ready(function() {
     // --- LÓGICA DEL CARRUSEL 3D ---
     const items = [
         {
-            image: 'img/foto7.jpeg',
-            caption: 'Mis 5 años'
+            image: 'img/foto2a.jpeg',
+            caption: 'Mis 2 años'
+        },
+        {
+            image: 'img/foto3a.jpeg',
+            caption: 'Mis 3 años'
+        },
+        {
+            image: 'img/foto4a.jpeg',
+            caption: 'Mis 4 años'
+        },
+        {
+            image: 'img/foto8a.jpeg',
+            caption: 'Mis 8 años'
+        },
+        {
+            image: 'img/foto17.jpeg',
+            caption: 'Yo'
         },
         {
             image: 'img/foto5.jpeg',
-            caption: 'Mis 10 años'
-        },
-        {
-            image: 'img/foto7.jpeg',
-            caption: 'Mis 12 años'
-        },
-        {
-            image: 'img/foto10.jpg',
-            caption: 'Mis 15 años'
-        },
-        {
-            image: 'img/foto1.jpg',
-            caption: 'Mi Fiesta'
-        },
-        {
-            image: 'img/foto2.jpg',
-            caption: 'Mis Amigos'
+            caption: 'Mis 14 años'
             
         },
           {
-            image: 'img/foto1.jpg',
+            image: 'img/foto7.jpeg',
             caption: 'Mis padres'
             
-        }
+        },
+        
+          {
+            image: 'img/foto12.jpeg',
+            caption: 'Feliz'
+            
+        },
+       
     ];
 
     // Variables de estado
@@ -283,12 +290,12 @@ $(document).ready(function() {
 	    const currentSection = $(sections[currentSectionIndex]);
 	    const newSection = $(sections[newIndex]);
 
-	    // Remueve clases de animación de la sección que se va
+ // Remueve clases de animación de la sección que se va
 	    currentSection.find('.animate__animated').removeClass('animate__fadeInDown animate__zoomIn animate__fadeInUp animate__fadeIn');
 	    
 	    if (newIndex > currentSectionIndex) { // Hacia adelante
 	        currentSection.removeClass('active').addClass('previous');
-	        newSection.addClass('active');
+	        newSection.addClass('active').removeClass('previous');
 	    } else { // Hacia atrás
 	        currentSection.removeClass('active');
 	        $(sections[newIndex]).removeClass('previous').addClass('active');
@@ -299,12 +306,14 @@ $(document).ready(function() {
 	    
 	    // Lógica para re-inicializar el carrusel 3D si se navega a la sección 'momentos'
 	    if (newSection.attr('id') === 'momentos') {
-	        // Si el carrusel ya fue inicializado, asegurar que esté visible
-	        if (carouselInitialized) {
-	            ensureCarouselVisible();
-	        } else {
-	            createCarouselItems(); // Re-inicializa el carrusel
+	        // Inicializar el carrusel si no ha sido creado
+	        if (!carouselInitialized) {
+	            createCarouselItems();
 	        }
+	        // SIEMPRE asegurar visibilidad cuando se navega a momentos
+	        setTimeout(() => {
+	            ensureCarouselVisible();
+	        }, 100);
 	    }
 	    
 	    // Configurar sección de confirmación
@@ -314,7 +323,7 @@ $(document).ready(function() {
 	    
 	    animateSectionContent(newSection);
 	}
-    
+
     function updateNavButtons() {
         $('#prev-btn').prop('disabled', currentSectionIndex === 0);
         $('#next-btn').prop('disabled', currentSectionIndex === sections.length - 1);

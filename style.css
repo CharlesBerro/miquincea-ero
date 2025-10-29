@@ -147,10 +147,10 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 #portada { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url(img/fondo2.jpg); }
 #versiculo { background-image: linear-gradient(rgb(151 186 229 / 81%), rgb(164 213 241 / 55%)), url('img/fondoVers.jpg'); }
 #momentos { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo2.jpg'); transform-style: preserve-3d; -webkit-transform-style: preserve-3d; overflow: hidden; /* Corrección de desbordamiento */ }
-#evento { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo4.png' ); }
+#evento { background-image: linear-gradient(rgb(107 167 241 / 75%), rgb(164 213 241 / 21%)), url('img/fondo4.png' ); }
 #lugar { background-image: linear-gradient(rgb(107 167 241 / 58%), rgb(164 213 241 / 72%)), url('img/fondo.jpg' ); }
-#vestimenta { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo2.jpg'); }
-#regalo { background-image: linear-gradient(rgb(107 167 241 / 67%), rgb(164 213 241 / 24%)), url('img/fondo1.jpg'); }
+#vestimenta { background-image: linear-gradient(rgba(60, 62, 65, 0.36), rgb(164 213 241 / 21%)), url('img/fondo2.jpg'); }
+#regalo { background-image: linear-gradient(rgb(21 104 205 / 0%), rgb(164 213 241 / 24%)), url('img/fondo1.jpg'); }
 #confirmacion { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo.jpg'); }
 
 /* --- ESTILOS DE CONTENIDO --- */
@@ -393,6 +393,14 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
         bottom: 6px;
         right: 12px;
     }
+     .vestimenta { 
+        font-size: 1.6rem; 
+        line-height: 1.6; 
+        max-width: 350px;
+        position: relative;
+        bottom: 6px;
+        right: -7px;
+    }
     .momentos-title {
         font-size: 1.8rem; 
         line-height: 1.8; 
@@ -414,7 +422,7 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
     
     .presentation-photo { width: 160px; height: 160px; }
     .number-15 { font-size: 155px; -webkit-box-reflect: below -15px linear-gradient(transparent, rgba(255,255,255,0.1)); }
-    .cursive-text { font-size: 1.3rem; }
+    .cursive-text { font-size: 1.6rem; }
     #event-countdown { font-size: 0.7rem; }
     #event-countdown span { font-size: 1.8rem; }
     .main-invite-text { font-size: 1rem; }
