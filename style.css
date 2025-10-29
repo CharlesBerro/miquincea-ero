@@ -16,15 +16,7 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 .content-wrapper { position: relative; z-index: 10; padding: 1.5rem; width: 90%; max-width: 500px; background: rgba(0, 0, 0, 0.25); border-radius: 15px; backdrop-filter: blur(5px); }
 
 /* --- FLOTADORES SVG COLORIDOS --- */
-#particles-js { 
-    position: fixed; 
-    width: 100%; 
-    height: 100%; 
-    background-color: #0c192c; 
-    z-index: 0; 
-    pointer-events: none;
-    overflow: hidden;
-}
+
 
 @keyframes float-up {
     0% {
@@ -130,8 +122,8 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 
 #nombre-familia {
     font-size: 3.2rem !important;
-    color: #0a5796 !important;
-    text-shadow: 2px 2px 6px rgba(19 79 215 / 64%) !important;
+    color: #005cad !important;
+    text-shadow: 2px 2px 6px rgba(20 19 93 / 64%) !important;
     margin-top: 0.4em;
     margin-bottom: -0.8em;
     line-height: 1.3;
@@ -146,8 +138,8 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 /* --- NOMBRE INVITADO Y CUPOS --- */
 #numero-cupos {
     font-family: 'Great Vibes', cursive;
-    font-size: 3.2rem;
-    color: #ffffff;
+    font-size: 4.2rem;
+    color: #127cd9;
     font-weight: 400;
 }
 
@@ -158,7 +150,7 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 #evento { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo4.png' ); }
 #lugar { background-image: linear-gradient(rgb(107 167 241 / 58%), rgb(164 213 241 / 72%)), url('img/fondo.jpg' ); }
 #vestimenta { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo2.jpg'); }
-#regalo { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo1.jpg'); }
+#regalo { background-image: linear-gradient(rgb(107 167 241 / 67%), rgb(164 213 241 / 24%)), url('img/fondo1.jpg'); }
 #confirmacion { background-image: linear-gradient(rgb(107 167 241 / 36%), rgb(164 213 241 / 21%)), url('img/fondo.jpg'); }
 
 /* --- ESTILOS DE CONTENIDO --- */
@@ -450,4 +442,72 @@ main { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
         font-size: 1.1rem;
     }
 }
+
+.elegant-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    max-width: 600px;
+    font-family: 'Caprasimo', cursive;
+    color: #3385dd;
+    margin: 0 auto;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.card-hearts {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.card-hearts .heart {
+    font-size: 1.6rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    animation: float 3.5s ease-in-out infinite;
+}
+
+.card-hearts .heart.h1 { animation-delay: 0s; }
+.card-hearts .heart.h2 { animation-delay: 0.6s; }
+.card-hearts .heart.h3 { animation-delay: 1.2s; }
+
+.envelope-icon {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 1.8s;
+}
+
+.envelope-svg {
+    width: 80px;
+    height: 64px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    transition: all 0.3s ease;
+}
+
+.envelope-svg:hover {
+    transform: scale(1.1) rotate(-2deg);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
