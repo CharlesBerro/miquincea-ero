@@ -392,7 +392,7 @@ $(document).ready(function() {
         const nombre = decodeURIComponent(getUrlParameter('familia') || 'Invitado');
         const enlace = window.location.href;
         const mensaje = `🌸 ¡Estás invitado a mis 15 ! 🌸\n\nHola ${nombre}\n\nQueremos Compartir Contigo este momento tan especial. Por favor abre el Enlace:\n\n${enlace}\n\nPor favor, confirma tu asistencia en la invitación digital. ¡Te esperamos! 💕\n\nCon cariño,\nMichell calderon`;
-        const urlWhatsapp = `https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`;
+        const urlWhatsapp = `https://wa.me/3137087635?text=${encodeURIComponent(mensaje)}`;
         whatsappLink.attr('href', urlWhatsapp);
     }
 
